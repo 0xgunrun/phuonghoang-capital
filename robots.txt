@@ -1,2 +1,4 @@
+# tu dong cap nhat
 User-agent: *
 Disallow: /
+# archive cu (khong xoa): /bao-tri-2026.html
