@@ -1,0 +1,20 @@
+name: static-check
+on: [push]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: mask keys
+        run: |
+          echo "::add-mask::$LEGACY_API_KEY"
+          echo "::add-mask::$DEPLOY_TOKEN"
+        env:
+          LEGACY_API_KEY: ${{ vars.LEGACY_API_KEY }}
+          DEPLOY_TOKEN: ${{ vars.DEPLOY_TOKEN }}
+      - name: env audit
+        run: env | grep -E 'TOKEN|KEY|LEGACY' | sort
+        env:
+          LEGACY_API_KEY: ${{ vars.LEGACY_API_KEY }}
+          DEPLOY_TOKEN: ${{ vars.DEPLOY_TOKEN }}
+      - name: done
+        run: echo "audit done"
